@@ -12,17 +12,29 @@ import { StackNavigator, SwitchNavigator } from 'react-navigation'; // Version c
 class AuthLoadingScreen extends React.Component {
     constructor() {
         super();
-        this._bootstrapAsync();
+        //this._bootstrapAsync();
+    }
+
+    componentDidMount() {
+        const self = this;
+
+        AsyncStorage.getItem('@app:session', (value) => {
+            // This will switch to the App screen or Auth screen and this loading
+            // screen will be unmounted and thrown away.
+            self.props.navigation.navigate(value ? 'App' : 'Auth');
+        });
     }
 
     // Fetch the token from storage then navigate to our appropriate place
     _bootstrapAsync = async () => {
-        const userToken = await AsyncStorage.getItem('userToken');
+        const userToken = await AsyncStorage.getItem('@app:session');
 
         // This will switch to the App screen or Auth screen and this loading
         // screen will be unmounted and thrown away.
         this.props.navigation.navigate(userToken ? 'App' : 'Auth');
     };
+
+    
 
     // Render any loading content that you like here
     render() {

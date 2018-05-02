@@ -3,54 +3,42 @@ import { StyleSheet } from 'react-native';
 import { AsyncStorage } from 'react-native';
 import { Header, Left, Body, Right, Title, Button, Icon } from 'native-base';
 import { StackNavigator, SwitchNavigator } from 'react-navigation';
+
 class AppHeader extends Component {
   constructor(props) {
     super(props);
 
+    console.log(props);
+
     this.state = {
-        myKey: null
+        username: null
     }
 
-    this.getKey('myKey')
-  }
+    const self = this;
 
-  getKey = async (key) => {
-    try {
-      const value = await AsyncStorage.getItem('userToken');
-      this.setState({myKey: value});
-    } catch (error) {
-      console.log("Error retrieving data" + error);
-    }
-  }
-
-  setKey = async (key, value) => {
-    try {
-      await AsyncStorage.setItem('userToken', value);
-    } catch (error) {
-      console.log("Error saving data" + error);
-    }
-  }
-
-  removeKey = async (key) => {
-    try {
-      await AsyncStorage.removeItem('userToken');
-      await getKey(key)
-    } catch (error) {
-      console.log("Error resetting data" + error);
-    }
+    AsyncStorage.getItem('@app:session').then((value) => {
+      self.setState({username: value});
+    });
   }
 
   _openSideBar = () => {
-    this.props.navigation.navigate("DrawerOpen");
+    const self = this;
+    const navigation = self.props.navigation;
+
+    navigation.navigate("DrawerOpen");
   }
 
-  _signOutAsync = async () => {
-    await AsyncStorage.clear(()=>this.props.navigation.navigate('Auth'));
-    
+  _signOut = () => {
+    const self = this;
+    const navigation = self.props.navigation;
+
+    AsyncStorage.removeItem('@app:session').then(()=>{
+      navigation.navigate('Auth')
+    });    
   }
 
   _renderHeader = () => {
-      if (this.state.myKey) {
+      if (this.state.username) {
           return (
             <Header>
               <Left>
@@ -59,17 +47,25 @@ class AppHeader extends Component {
                 </Button>
               </Left>
               <Body>
-                <Title>{this.props.title + this.state.myKey}</Title>
+                <Title>{this.props.title + ' ' + this.state.username}</Title>
               </Body>
               <Right>
-                <Button transparent onPress={()=>this._signOutAsync()}>
+                <Button transparent onPress={()=>this._signOut()}>
                   <Icon name="log-out" />
                 </Button>
               </Right>
             </Header>
           );
       } else {
-          return null;
+          return (
+            <Header>
+              <Left/>
+              <Body>
+                <Title>{this.props.title}</Title>
+              </Body>
+              <Right/>
+            </Header>
+          );
       }
   }
 

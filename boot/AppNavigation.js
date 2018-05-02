@@ -39,7 +39,14 @@ const AppStack = StackNavigator(
     }
 );
 // Navigator các form chưa xác thực login
-const AuthStack = StackNavigator({ Login: LoginScreen });
+const AuthStack = StackNavigator(
+    { 
+        Login: LoginScreen 
+    },
+    {
+        initialRouteName: 'Login',
+        headerMode: "none" // không hiển thị header mặc định của react-navigation để sử dụng header của native-base
+    });
 // Navigator quản lý trạng thái login
 const AuthSwitch = SwitchNavigator(
     {

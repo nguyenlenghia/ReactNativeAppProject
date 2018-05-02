@@ -15,11 +15,13 @@ class LoginScreen extends Component {
     };
   };
 
-  _signInAsync = async () => {
-    Alert.alert('xxx:'+this.state.username + ' ' + this.state.password)
+  _signIn = () => {
+    const self = this;
 
-    await AsyncStorage.setItem('userToken', this.state.username);
-    this.props.navigation.navigate('Home');
+    AsyncStorage.setItem('@app:session', self.state.username).then(()=>{
+      // action when setItem done
+      self.props.navigation.navigate('Home');
+    });    
   };
 
   _onPressButton = () => {
@@ -43,7 +45,7 @@ class LoginScreen extends Component {
   render() {
     return (
       <Container>
-        <AppHeader title="Welcome" />
+        <AppHeader title="Welcome" navigation={this.props.navigation} />
         <Content>
           <Form>
             <Item floatingLabel>
@@ -58,7 +60,7 @@ class LoginScreen extends Component {
                 onChangeText={(password) => this.setState({ password })}
               />
             </Item>
-            <Button success block onPress={this._signInAsync}>
+            <Button success block onPress={this._signIn}>
               <Text>Đăng nhập</Text>
             </Button>
           </Form>

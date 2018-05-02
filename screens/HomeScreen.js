@@ -9,7 +9,7 @@ class HomeScreen extends Component {
   render() {
     return (
       <Container>
-        <AppHeader title="Home" />
+        <AppHeader title="Home" navigation={this.props.navigation} />
         <Content>
           <Label>HELLO</Label>
         </Content>
