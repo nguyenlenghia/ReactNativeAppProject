@@ -3,12 +3,12 @@ import { StyleSheet } from 'react-native';
 import { AsyncStorage } from 'react-native';
 import { Header, Left, Body, Right, Title, Button, Icon } from 'native-base';
 import { StackNavigator, SwitchNavigator } from 'react-navigation';
+// app
+import { AppScreen } from '../commons/appcommon';
 
 class AppHeader extends Component {
   constructor(props) {
     super(props);
-
-    console.log(props);
 
     this.state = {
         username: null
@@ -33,7 +33,7 @@ class AppHeader extends Component {
     const navigation = self.props.navigation;
 
     AsyncStorage.removeItem('@app:session').then(()=>{
-      navigation.navigate('Auth')
+      navigation.navigate(AppScreen.Login)
     });    
   }
 

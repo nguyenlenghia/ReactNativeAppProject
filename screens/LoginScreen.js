@@ -5,6 +5,8 @@ import { Header, Left, Body, Right, Title, Icon } from 'native-base';
 import { Container, Content, Form, Item, Input, Label, Button, Text } from 'native-base';
 
 import AppHeader from '../components/AppHeader';
+// app
+import { AppScreen } from '../commons/appcommon';
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -18,9 +20,11 @@ class LoginScreen extends Component {
   _signIn = () => {
     const self = this;
 
+    console.log(AppScreen)
+
     AsyncStorage.setItem('@app:session', self.state.username).then(()=>{
       // action when setItem done
-      self.props.navigation.navigate('Home');
+      self.props.navigation.navigate(AppScreen.Home);
     });    
   };
 
@@ -35,7 +39,7 @@ class LoginScreen extends Component {
           text: JSON.stringify(responseJson)
         });
 
-        this.props.navigation.navigate('Home')
+        this.props.navigation.navigate(AppScreen.Home)
       })
       .catch((error) => {
         console.error(error);

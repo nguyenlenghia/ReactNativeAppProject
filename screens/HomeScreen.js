@@ -4,6 +4,8 @@ import { Header, Left, Body, Right, Title } from 'native-base';
 import { Container, Content, Form, Item, Input, Label, Button, Text } from 'native-base';
 
 import AppHeader from '../components/AppHeader';
+// app
+import { AppScreen } from '../commons/appcommon';
 
 class HomeScreen extends Component {
   render() {
