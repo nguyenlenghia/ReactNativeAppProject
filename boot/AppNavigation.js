@@ -8,6 +8,7 @@ import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 
 import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
+import CreateScreen from '../screens/CreateScreen';
 
 // Navigator các form kèm SideBar (left menu)
 const Drawer = DrawerNavigator(
@@ -18,9 +19,12 @@ const Drawer = DrawerNavigator(
         Login: {
             screen: LoginScreen
         },
+        Create: {
+            screen: CreateScreen
+        },
     },
     {
-        initialRouteName: "Login",
+        initialRouteName: "Home",
         contentOptions: {
             activeTintColor: "#e91e63"
         },

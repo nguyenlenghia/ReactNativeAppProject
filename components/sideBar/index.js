@@ -14,14 +14,8 @@ import {
 import styles from "./style";
 
 const drawerCover = require("../../images/drawer-cover.png");
-const drawerImage = require("../../images/logo-kitchen-sink.png");
+const drawerImage = require("../../images/f_logo.png");
 const datas = [
-  {
-    name: "Đăng nhập",
-    route: "Login",
-    icon: "easel",
-    bg: "#C5F442"
-  },
   {
     name: "Trang chủ",
     route: "Home",
@@ -31,43 +25,43 @@ const datas = [
   {
     name: "Giao việc",
     itemDivider: true,
-    icon: "phone-portrait",
+    icon: "today",
     bg: "#C5F442"
   },
   {
     name: "Thêm mới",
-    route: "Home",
-    icon: "phone-portrait",
+    route: "Create",
+    icon: "add",
     bg: "#C5F442"
   },
   {
     name: "Khởi tạo",
     route: "Home",
-    icon: "phone-portrait",
+    icon: "edit",
     bg: "#C5F442"
   },
   {
     name: "Chưa hoàn thành",
     route: "Home",
-    icon: "phone-portrait",
+    icon: "timelapse",
     bg: "#C5F442"
   },
   {
     name: "Đã hoàn thành",
     route: "Home",
-    icon: "phone-portrait",
+    icon: "check",
     bg: "#C5F442"
   },
   {
     name: "Quá hạn",
     route: "Home",
-    icon: "phone-portrait",
+    icon: "error-outline",
     bg: "#C5F442"
   },
   {
     name: "Ủy Nhiệm",
     route: "Home",
-    icon: "phone-portrait",
+    icon: "people-outline",
     bg: "#C5F442"
   }
 ];
@@ -98,10 +92,11 @@ class SideBar extends Component {
                 button
                 noBorder
                 itemDivider={data.itemDivider}
-                onPress={() => this.props.navigation.navigate(data.route)}
+                onPress={() => { if (data.route) this.props.navigation.navigate(data.route); }}
               >
                 <Left>
                   <Icon
+                    type="MaterialIcons"
                     active
                     name={data.icon}
                     style={{ color: "#777", fontSize: 26, width: 30 }}

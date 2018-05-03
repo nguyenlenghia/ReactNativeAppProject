@@ -3,10 +3,10 @@ import { StyleSheet, Alert } from 'react-native';
 import { AsyncStorage } from 'react-native';
 import { Header, Left, Body, Right, Title, Icon } from 'native-base';
 import { Container, Content, Form, Item, Input, Label, Button, Text } from 'native-base';
-
+// components
 import AppHeader from '../components/AppHeader';
 // app
-import { AppScreen } from '../commons/appcommon';
+import { AppScreen, AppUtil } from '../commons/appcommon';
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -19,13 +19,27 @@ class LoginScreen extends Component {
 
   _signIn = () => {
     const self = this;
+    const postData = {
+      UserName: self.state.username,
+      Password: self.state.password
+    };
 
-    console.log(AppScreen)
-
-    AsyncStorage.setItem('@app:session', self.state.username).then(()=>{
-      // action when setItem done
-      self.props.navigation.navigate(AppScreen.Home);
-    });    
+    //AppUtil.post('http://10.32.42.50:45144/Account/ApiLogin', postData, (res) => {
+    //AppUtil.post('http://workman.tanhoangminh.com.vn/Home/getWorkHome', postData, (res) => {
+    AppUtil.postJson('http://10.32.42.50:45144/Account/ApiLogin', postData, (res) => {
+      if(res.Result == "OK") {
+        AsyncStorage.setItem('@app:session', res.SSID).then(()=>{
+          AsyncStorage.setItem('@app:username', self.state.username).then(()=>{
+            AsyncStorage.setItem('@app:isLogin', "True").then(()=>{
+              // action when setItem done
+              self.props.navigation.navigate(AppScreen.Home);
+            });
+          });
+        });
+      } else {
+        Alert.alert(res.Message);
+      }
+    });
   };
 
   _onPressButton = () => {
@@ -53,7 +67,7 @@ class LoginScreen extends Component {
         <Content>
           <Form>
             <Item floatingLabel>
-              <Label>Username</Label>
+              <Label>Tài khoản</Label>
               <Input
                 onChangeText={(username) => this.setState({ username })}
               />

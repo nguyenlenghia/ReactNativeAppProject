@@ -18,7 +18,7 @@ class AuthLoadingScreen extends React.Component {
     componentDidMount() {
         const self = this;
 
-        AsyncStorage.getItem('@app:session', (value) => {
+        AsyncStorage.getItem('@app:username').then((value) => {
             // This will switch to the App screen or Auth screen and this loading
             // screen will be unmounted and thrown away.
             self.props.navigation.navigate(value ? 'App' : 'Auth');

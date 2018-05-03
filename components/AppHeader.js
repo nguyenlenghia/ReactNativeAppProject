@@ -16,7 +16,7 @@ class AppHeader extends Component {
 
     const self = this;
 
-    AsyncStorage.getItem('@app:session').then((value) => {
+    AsyncStorage.getItem('@app:username').then((value) => {
       self.setState({username: value});
     });
   }
@@ -32,7 +32,7 @@ class AppHeader extends Component {
     const self = this;
     const navigation = self.props.navigation;
 
-    AsyncStorage.removeItem('@app:session').then(()=>{
+    AsyncStorage.clear().then(()=>{
       navigation.navigate(AppScreen.Login)
     });    
   }
