@@ -14,7 +14,7 @@ import {
 import styles from "./style";
 
 const drawerCover = require("../../images/drawer-cover.png");
-const drawerImage = require("../../images/f_logo.png");
+const drawerImage = require("../../images/logoWhile.png");
 const datas = [
   {
     name: "Trang chủ",

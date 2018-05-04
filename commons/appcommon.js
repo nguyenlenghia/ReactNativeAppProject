@@ -6,8 +6,14 @@ const AppScreen = {
     Create : "Create"
 }
 
+const AppConfig = {
+    ApiUrl : "http://10.32.42.50:45144"
+}
+
 class AppUtilObj {
     postJson = (url, data, callback) => {
+        url = "http://10.32.42.50:45144" + url;
+
         return fetch(url, {
             method: 'POST',
             headers: {
@@ -27,6 +33,8 @@ class AppUtilObj {
         });
     }
     getJson = (url, data, callback) => {
+        url = "http://10.32.42.50:45144" + url;
+
         // add data vào url querystring
         const queryString = this.convertObjToQueryString(data);
         if(queryString) {

@@ -16,6 +16,7 @@ class AuthLoadingScreen extends React.Component {
     }
 
     componentDidMount() {
+        // This method is called after component init
         const self = this;
 
         AsyncStorage.getItem('@app:username').then((value) => {

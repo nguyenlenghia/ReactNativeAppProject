@@ -7,6 +7,7 @@ import SideBar from "../components/sideBar";
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 
 import HomeScreen from '../screens/HomeScreen';
+import TestScreen from '../screens/TestScreen';
 import LoginScreen from '../screens/LoginScreen';
 import CreateScreen from '../screens/CreateScreen';
 
@@ -16,6 +17,9 @@ const Drawer = DrawerNavigator(
         Home: {
             screen: HomeScreen
         },
+        Test: {
+            screen: TestScreen
+        },
         Login: {
             screen: LoginScreen
         },
@@ -24,7 +28,7 @@ const Drawer = DrawerNavigator(
         },
     },
     {
-        initialRouteName: "Home",
+        initialRouteName: "Test",
         contentOptions: {
             activeTintColor: "#e91e63"
         },

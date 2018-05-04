@@ -38,39 +38,39 @@ class AppHeader extends Component {
   }
 
   _renderHeader = () => {
-      if (this.state.username) {
-          return (
-            <Header>
-              <Left>
-                <Button transparent onPress={()=>this._openSideBar()}>
-                  <Icon name="menu" />
-                </Button>
-              </Left>
-              <Body>
-                <Title>{this.props.title + ' ' + this.state.username}</Title>
-              </Body>
-              <Right>
-                <Button transparent onPress={()=>this._signOut()}>
-                  <Icon name="log-out" />
-                </Button>
-              </Right>
-            </Header>
-          );
-      } else {
-          return (
-            <Header>
-              <Left/>
-              <Body>
-                <Title>{this.props.title}</Title>
-              </Body>
-              <Right/>
-            </Header>
-          );
-      }
+      
   }
 
   render() {
-    return this._renderHeader();
+    if (this.state.username) {
+      return (
+        <Header {...this.props}>
+          <Left>
+            <Button transparent onPress={()=>this._openSideBar()}>
+              <Icon name="menu" />
+            </Button>
+          </Left>
+          <Body>
+            <Title>{this.props.title + ' ' + this.state.username}</Title>
+          </Body>
+          <Right>
+            <Button transparent onPress={()=>this._signOut()}>
+              <Icon name="log-out" />
+            </Button>
+          </Right>
+        </Header>
+      );
+    } else {
+        return (
+          <Header {...this.props}>
+            <Left/>
+            <Body>
+              <Title>{this.props.title}</Title>
+            </Body>
+            <Right/>
+          </Header>
+        );
+    }
   }
 }
 

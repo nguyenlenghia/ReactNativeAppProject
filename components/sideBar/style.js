@@ -14,10 +14,10 @@ export default {
   },
   drawerImage: {
     position: "absolute",
-    left: Platform.OS === "android" ? deviceWidth / 10 : deviceWidth / 9,
+    left: Platform.OS === "android" ? deviceWidth / 7 : deviceWidth / 9,
     top: Platform.OS === "android" ? deviceHeight / 13 : deviceHeight / 12,
-    width: 210,
-    height: 75,
+    width: 133,
+    height: 111,
     resizeMode: "cover"
   },
   text: {

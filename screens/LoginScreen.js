@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Alert } from 'react-native';
 import { AsyncStorage } from 'react-native';
+import { StyleSheet, Alert } from 'react-native';
 import { Header, Left, Body, Right, Title, Icon } from 'native-base';
 import { Container, Content, Form, Item, Input, Label, Button, Text } from 'native-base';
 // components
@@ -26,7 +26,7 @@ class LoginScreen extends Component {
 
     //AppUtil.post('http://10.32.42.50:45144/Account/ApiLogin', postData, (res) => {
     //AppUtil.post('http://workman.tanhoangminh.com.vn/Home/getWorkHome', postData, (res) => {
-    AppUtil.postJson('http://10.32.42.50:45144/Account/ApiLogin', postData, (res) => {
+    AppUtil.postJson('/Account/ApiLogin', postData, (res) => {
       if(res.Result == "OK") {
         AsyncStorage.setItem('@app:session', res.SSID).then(()=>{
           AsyncStorage.setItem('@app:username', self.state.username).then(()=>{
