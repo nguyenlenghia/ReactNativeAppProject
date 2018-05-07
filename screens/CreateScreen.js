@@ -4,7 +4,7 @@ import { StyleSheet, Alert } from 'react-native';
 import { Header, Left, Right, Title } from 'native-base';
 import { Container, Content, Body } from 'native-base';
 import { Form, Item, Label, Text, Button, Picker, Icon, Input, Textarea } from 'native-base';
-import { Card, CardItem, List } from 'native-base';
+import { Card, CardItem, List, ListItem, Switch } from 'native-base';
 import moment from 'moment';
 
 // components
@@ -93,20 +93,20 @@ class CreateScreen extends Component {
     // This method is called after component init
     const self = this;
 
-    AppUtil.postJson("/Work/CreateInit", {}, (res) => {
-      if (res.Result === "OK") {
-        const data = res.Data;
-        self.setState({
-          workGroups: data.listWorkGroup,
-          piorityList: data.listPriority,
-          groups: data.listDepartments,
-          receiverItems: data.listReceiver,
-          assignToCcItems: data.listReceiver,
-          rootWorks: data.listRootWork
-        });
-      }
-      console.log(self.state.workGroups)
-    });
+    // AppUtil.postJson("/Work/CreateInit", {}, (res) => {
+    //   if (res.Result === "OK") {
+    //     const data = res.Data;
+    //     self.setState({
+    //       workGroups: data.listWorkGroup,
+    //       piorityList: data.listPriority,
+    //       groups: data.listDepartments,
+    //       receiverItems: data.listReceiver,
+    //       assignToCcItems: data.listReceiver,
+    //       rootWorks: data.listRootWork
+    //     });
+    //   }
+    //   console.log(self.state.workGroups)
+    // });
   }
 
   onWorkGroupChange = (value) => {

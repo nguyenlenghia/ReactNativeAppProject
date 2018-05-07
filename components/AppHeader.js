@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import { AsyncStorage } from 'react-native';
 import { Header, Left, Body, Right, Title, Button, Icon } from 'native-base';
-import { StackNavigator, SwitchNavigator } from 'react-navigation';
 // app
 import { AppScreen } from '../commons/appcommon';
 

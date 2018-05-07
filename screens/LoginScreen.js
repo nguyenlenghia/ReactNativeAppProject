@@ -27,12 +27,24 @@ class LoginScreen extends Component {
     //AppUtil.post('http://10.32.42.50:45144/Account/ApiLogin', postData, (res) => {
     //AppUtil.post('http://workman.tanhoangminh.com.vn/Home/getWorkHome', postData, (res) => {
     AppUtil.postJson('/Account/ApiLogin', postData, (res) => {
+
+      // TODO: test
+      AsyncStorage.setItem('@app:session', 'SSID_TEST').then(()=>{
+        AsyncStorage.setItem('@app:username', self.state.username).then(()=>{
+          AsyncStorage.setItem('@app:isLogin', "True").then(()=>{
+            // action when setItem done
+            self.props.navigation.navigate(AppScreen.App);
+          });
+        });
+      });
+      return;
+
       if(res.Result == "OK") {
         AsyncStorage.setItem('@app:session', res.SSID).then(()=>{
           AsyncStorage.setItem('@app:username', self.state.username).then(()=>{
             AsyncStorage.setItem('@app:isLogin', "True").then(()=>{
               // action when setItem done
-              self.props.navigation.navigate(AppScreen.Home);
+              self.props.navigation.navigate(AppScreen.App);
             });
           });
         });

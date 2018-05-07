@@ -1,35 +1,40 @@
 import React, { Component } from 'react';
-import { AsyncStorage } from 'react-native';
-import { StyleSheet, Alert } from 'react-native';
+import { StyleSheet, AsyncStorage } from 'react-native';
 
-import { Header, Left, Right, Title } from 'native-base';
-import { Container, Content, Body } from 'native-base';
-import { Form, Item, Label, Text, Button, Picker, Icon, Input, Textarea, CheckBox } from 'native-base';
-import { Card, CardItem, List, ListItem, Switch, FooterTab, Footer, Tabs, Tab, ScrollableTab } from 'native-base';
+import { Left, Right, Body } from 'native-base';
+import { Card, CardItem } from 'native-base';
+import { List, ListItem } from 'native-base';
+import { Tabs, Tab, ScrollableTab } from 'native-base';
+import { Content, Form, Item, Label, Text, Button, Picker, Icon, Input, Textarea, CheckBox, Switch } from 'native-base';
+
+import DateTimePicker from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 
 // components
-import AppHeader from '../components/AppHeader';
+import { AppContainer } from '../components';
 
-class CreateScreen extends Component {
+class TestScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isLoading: true,
+      
+      startDate: null,
+      isDateTimePickerVisible: false,
+    };
   }
 
   componentDidMount() {
     // This method is called after component init
     const self = this;
+
+    self.setState({
+      // loading complete
+      isLoading: false
+    })
   }
 
   render() {
-    if (this.state.isLoading) {
-      return (
-        <View style={{flex: 1, paddingTop: 20}}>
-          <ActivityIndicator />
-        </View>
-      );
-    }
     const ThisForm = (
       <Card>
             <CardItem header bordered>
@@ -63,6 +68,15 @@ class CreateScreen extends Component {
             
             <CardItem>
                 <Form>
+                  <Label>Textarea2</Label>
+                  <Item regular style={{ width: 200 }}>
+                    <Input placeholder='Regular Textbox' multiline = {true}    numberOfLines = {4} />
+                  </Item>
+                </Form>
+            </CardItem>
+            
+            <CardItem>
+                <Form>
                   <Label>Dropdown</Label>
                   <Picker
                     note
@@ -85,6 +99,29 @@ class CreateScreen extends Component {
               </Left>
             </CardItem>
 
+            <CardItem>
+              <Form>
+                <Label>DateTimePicker</Label>
+                <Item regular style={{ width: 200 }}>
+                  <Input placeholder='DateTimePicker Textbox' editable={false} value={this.state.startDate}  />
+                  <Icon active type="MaterialIcons" name='today' onPress={()=>this.setState({isDateTimePickerVisible: true})} />
+                </Item>
+                <DateTimePicker
+                  date={moment(this.state.startDate || '', 'YYYY-MM-DD')||new Date()}
+                  isVisible={this.state.isDateTimePickerVisible}
+                  onConfirm={(date) => {
+                    console.log('A date has been picked: ', date);
+                    // hide picker
+                    this.setState({
+                      startDate: moment(date).format('YYYY-MM-DD'),
+                      isDateTimePickerVisible: false
+                    })
+                  }}
+                  onCancel={()=>this.setState({isDateTimePickerVisible: false})}
+                />
+              </Form>
+            </CardItem>
+
             <CardItem footer bordered>
               <Button light style={styles.buttonHuy}>
                 <Text>Hủy</Text>
@@ -100,8 +137,11 @@ class CreateScreen extends Component {
     )
 
     return (
-      <Container>
-        <AppHeader title="Thêm mới" navigation={this.props.navigation} hasTabs />
+      <AppContainer
+        title="Thêm mới"
+        navigation={this.props.navigation}
+        isLoading={this.state.isLoading}
+        hasTabs>
         <Content>
           <Tabs renderTabBar={()=> <ScrollableTab />}>
             <Tab heading="Tab1">
@@ -122,25 +162,8 @@ class CreateScreen extends Component {
               <Text>aaa</Text>
             </Tab>
           </Tabs>
-          
         </Content>
-        <Footer>
-          <FooterTab>
-            <Button>
-              <Icon name="apps" />
-            </Button>
-            <Button>
-              <Icon name="camera" />
-            </Button>
-            <Button active>
-              <Icon active name="navigate" />
-            </Button>
-            <Button>
-              <Icon name="person" />
-            </Button>
-          </FooterTab>
-        </Footer>
-      </Container>
+      </AppContainer>
     );
   }
 }
@@ -157,4 +180,4 @@ var styles = StyleSheet.create({
   },
 });
 
-export default CreateScreen;
+export default TestScreen;
