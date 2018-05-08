@@ -10,6 +10,7 @@ import HomeScreen from '../screens/HomeScreen';
 import TestScreen from '../screens/TestScreen';
 import LoginScreen from '../screens/LoginScreen';
 import CreateScreen from '../screens/CreateScreen';
+import WebViewScreen from '../screens/WebViewScreen';
 
 // Navigator các form kèm SideBar (left menu)
 const Drawer = DrawerNavigator(
@@ -20,6 +21,9 @@ const Drawer = DrawerNavigator(
         Test: {
             screen: TestScreen
         },
+        WebView: {
+            screen: WebViewScreen
+        },
         Login: {
             screen: LoginScreen
         },
@@ -28,7 +32,7 @@ const Drawer = DrawerNavigator(
         },
     },
     {
-        initialRouteName: "Test",
+        initialRouteName: "WebView",
         contentOptions: {
             activeTintColor: "#e91e63"
         },
